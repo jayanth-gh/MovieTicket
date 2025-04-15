@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Movie - MovieHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #111111;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(17, 17, 17, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a i {
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 2rem;
+        }
+
+        .booking-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ff4d4d, #f9cb28);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        .booking-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.2);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        /* Change checkbox color from white to black */
+        input[type="checkbox"] {
+            accent-color: #000;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #ff4d4d, #f9cb28);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+        }
+
+        .error-message {
+            color: #dc3545;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .booking-section {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MovieHub</a>
+            <div class="nav-links">
+                <a href="index.html">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="book.html" class="active">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+                <a href="user_profile.html">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <a href="admin.html">
+                    <i class="fas fa-user-shield"></i> Admin
+                </a>
+                <a href="network_info.html">
+                    <i class="fas fa-network-wired"></i> Network Info
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="booking-section">
+            <h2 class="section-title">Book Your Movie Tickets</h2>
+            <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                    <label for="movie">Select Movie</label>
+                    <select id="movie" name="movie" class="form-control" required>
+                        <option value="">Select a movie</option>
+                    </select>
+                    <div class="error-message" id="movieError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="theatre">Select Theatre</label>
+                    <select id="theatre" name="theatre" class="form-control" required>
+                        <option value="">Select a theatre</option>
+                    </select>
+                    <div class="error-message" id="theatreError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="show">Select Show</label>
+                    <select id="show" name="show" class="form-control" required>
+                        <option value="">Select a show</option>
+                    </select>
+                    <div class="error-message" id="showError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">Select Date</label>
+                    <input type="date" id="date" name="date" class="form-control" required>
+                    <div class="error-message" id="dateError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="seats">Number of Seats</label>
+                    <select id="seats" name="seats" class="form-control" required>
+                        <option value="">Select seats</option>
+                        <option value="1">1 Seat</option>
+                        <option value="2">2 Seats</option>
+                        <option value="3">3 Seats</option>
+                        <option value="4">4 Seats</option>
+                        <option value="5">5 Seats</option>
+                    </select>
+                    <div class="error-message" id="seatsError"></div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-check-circle"></i> Confirm Booking
+                </button>
+  </form>
+        </div>
+    </div>
+
+    <script>
+        // Fetch movies and populate the movie dropdown
+        function fetchMovies() {
+            fetch('http://localhost/movie-booking/php/fetch_movies.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const movieSelect = document.getElementById('movie');
+                        data.movies.forEach(movie => {
+                            const option = document.createElement('option');
+                            option.value = movie.id;
+                            option.textContent = movie.title;
+                            movieSelect.appendChild(option);
+                        });
+                    } else {
+                        console.error('Error fetching movies:', data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Fetch shows for selected movie and theatre
+        function fetchShows(movieId, theatreId) {
+            const selectedDate = document.getElementById('date').value;
+            if (!selectedDate) {
+                alert('Please select a date first');
+                return;
+            }
+            
+            fetch(`http://localhost/movie-booking/php/fetch_shows.php?movie_id=${movieId}&date=${selectedDate}&theatre_id=${theatreId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const showSelect = document.getElementById('show');
+                    const showError = document.getElementById('showError');
+                    
+                    if (data.success && data.shows && data.shows.length > 0) {
+                        showSelect.innerHTML = '<option value="">Choose a show time</option>';
+                        data.shows.forEach(show => {
+                            const option = document.createElement('option');
+                            option.value = show.id;
+                            option.textContent = `${show.show_time} - ${show.theatre_name} (${show.theatre_location})`;
+                            showSelect.appendChild(option);
+                        });
+                        showError.textContent = '';
+                    } else {
+                        showSelect.innerHTML = '<option value="">No shows available</option>';
+                        showError.textContent = data.message || 'No shows available for the selected date and theatre';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const showSelect = document.getElementById('show');
+                    const showError = document.getElementById('showError');
+                    showSelect.innerHTML = '<option value="">Error loading shows</option>';
+                    showError.textContent = 'Failed to load shows. Please try again.';
+                });
+        }
+
+        // Fetch theatres for selected movie
+        function fetchTheatres(movieId) {
+            fetch(`http://localhost/movie-booking/php/fetch_theatres.php?movie_id=${movieId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const theatreSelect = document.getElementById('theatre');
+                        theatreSelect.innerHTML = '<option value="">Select a theatre</option>';
+                        data.theatres.forEach(theatre => {
+                            const option = document.createElement('option');
+                            option.value = theatre.id;
+                            option.textContent = `${theatre.name} - ${theatre.location}`;
+                            theatreSelect.appendChild(option);
+                        });
+                    } else {
+                        console.error('Error fetching theatres:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        // Handle form submission
+        document.getElementById('bookingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const movieId = document.getElementById('movie').value;
+            const date = document.getElementById('date').value;
+            const showId = document.getElementById('show').value;
+            const seats = document.getElementById('seats').value;
+            const userEmail = localStorage.getItem('userEmail');
+            const userName = localStorage.getItem('userName');
+
+            if (!userEmail || !userName) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const bookingData = {
+                movie_id: movieId,
+                date: date,
+                show_id: showId,
+                seats: seats,
+                customer_name: userName,
+                customer_email: userEmail
+            };
+
+            fetch('http://localhost/movie-booking/php/make_booking.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(bookingData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Store booking details in session for the booking details page
+                    const bookingDetails = {
+                        booking_id: data.booking_id,
+                        movie_title: data.movie_title,
+                        show_time: data.show_time,
+                        seats: seats,
+                        customer_name: userName
+                    };
+                    
+                    // Store booking details in localStorage for the booking details page
+                    localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
+                    
+                    // Redirect to booking details page
+                    window.location.href = 'booking_details.html';
+                } else {
+                    alert('Failed to make booking: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Failed to make booking. Please try again later.');
+            });
+        });
+
+        // Update theatres when movie is selected
+        document.getElementById('movie').addEventListener('change', function() {
+            const movieId = this.value;
+            if (movieId) {
+                fetchTheatres(movieId);
+                // Clear show selection
+                document.getElementById('show').innerHTML = '<option value="">Select a show</option>';
+            }
+        });
+
+        // Update shows when theatre or date is selected
+        document.getElementById('theatre').addEventListener('change', function() {
+            const movieId = document.getElementById('movie').value;
+            const theatreId = this.value;
+            const date = document.getElementById('date').value;
+            if (movieId && theatreId && date) {
+                fetchShows(movieId, theatreId);
+            }
+        });
+
+        document.getElementById('date').addEventListener('change', function() {
+            const movieId = document.getElementById('movie').value;
+            const theatreId = document.getElementById('theatre').value;
+            if (movieId && theatreId) {
+                fetchShows(movieId, theatreId);
+            }
+        });
+
+        // Load movies when the page loads
+        document.addEventListener('DOMContentLoaded', fetchMovies);
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+AddType application/x-httpd-php .php
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /movie-booking/
+    
+    # Handle PHP files directly
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.+)\.php$ php/$1.php [L]
+</IfModule>
+
+# Ensure PHP files are executed
+<FilesMatch "\.php$">
+    SetHandler application/x-httpd-php
+</FilesMatch> 

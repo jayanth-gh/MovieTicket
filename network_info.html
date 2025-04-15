@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieHub Network Info</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #111111;
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .info-box {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #0069d9;
+        }
+
+        .note {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0069d9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MovieHub Network Information</h1>
+        
+        <div class="card">
+            <h2>Your Server Information</h2>
+            <p>This information will help other devices on your network access MovieHub:</p>
+            
+            <div id="serverInfo">Loading server information...</div>
+            
+            <div class="note">
+                <p><strong>Note:</strong> Other devices must be connected to the same Wi-Fi network to access the website.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Quick Access</h2>
+            <p>Click the button below to go to the MovieHub homepage:</p>
+            
+            <a href="index.html" class="btn">Go to MovieHub</a>
+        </div>
+    </div>
+
+    <script>
+        // Fetch server information
+        fetch('find_ip.php')
+            .then(response => response.json())
+            .then(data => {
+                const serverInfo = document.getElementById('serverInfo');
+                
+                // Create info boxes
+                let html = `
+                    <p><strong>Server IP Address:</strong></p>
+                    <div class="info-box">
+                        ${data.server_ip}
+                        <button class="copy-btn" onclick="copyToClipboard('${data.server_ip}')">Copy</button>
+                    </div>
+                    
+                    <p><strong>Access URL:</strong></p>
+                    <div class="info-box">
+                        ${data.access_url}
+                        <button class="copy-btn" onclick="copyToClipboard('${data.access_url}')">Copy</button>
+                    </div>
+                `;
+                
+                serverInfo.innerHTML = html;
+            })
+            .catch(error => {
+                document.getElementById('serverInfo').innerHTML = `
+                    <div class="note">
+                        <p>Error loading server information. Please check your XAMPP server is running.</p>
+                    </div>
+                `;
+                console.error('Error:', error);
+            });
+            
+        // Copy to clipboard function
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+    </script>
+</body>
+</html> 

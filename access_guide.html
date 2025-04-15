@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Access MovieHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #111111;
+            color: #fff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .steps {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .steps li {
+            margin-bottom: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .note {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .warning {
+            background: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid #dc3545;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0069d9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>How to Access MovieHub</h1>
+        
+        <div class="card">
+            <h2>Access from the Same Network</h2>
+            <p>To access MovieHub from other devices on your network (like phones or other laptops), follow these steps:</p>
+            
+            <ol class="steps">
+                <li>Make sure your XAMPP server is running (Apache and MySQL)</li>
+                <li>Find your computer's IP address:
+                    <ul>
+                        <li>On Windows: Open Command Prompt and type <span class="code">ipconfig</span></li>
+                        <li>On Mac/Linux: Open Terminal and type <span class="code">ifconfig</span> or <span class="code">ip addr</span></li>
+                    </ul>
+                </li>
+                <li>Look for "IPv4 Address" - it will look like <span class="code">192.168.1.xxx</span></li>
+                <li>On other devices, open a web browser and enter: <span class="code">http://192.168.1.xxx/movie-booking</span> (replace with your actual IP)</li>
+            </ol>
+            
+            <div class="note">
+                <p><strong>Note:</strong> All devices must be connected to the same Wi-Fi network.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Make Website Public (Advanced)</h2>
+            <p>To make your website accessible from anywhere on the internet, you have several options:</p>
+            
+            <ol class="steps">
+                <li><strong>Port Forwarding:</strong> Configure your router to forward port 80 to your computer</li>
+                <li><strong>Use a Dynamic DNS service:</strong> Services like No-IP or Dynu can give you a public domain name</li>
+                <li><strong>Deploy to a hosting service:</strong> Upload your website to a hosting provider like:
+                    <ul>
+                        <li>GitHub Pages (free)</li>
+                        <li>Netlify (free tier available)</li>
+                        <li>Vercel (free tier available)</li>
+                        <li>Traditional web hosting (paid)</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <div class="warning">
+                <p><strong>Security Warning:</strong> Making your XAMPP server publicly accessible can pose security risks. Consider using a proper hosting service for public websites.</p>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Quick Access Links</h2>
+            <p>Once you've set up access, you can use these links:</p>
+            
+            <ul class="steps">
+                <li><a href="index.html" class="btn">Home Page</a></li>
+                <li><a href="book.html" class="btn">Book Tickets</a></li>
+                <li><a href="login.html" class="btn">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

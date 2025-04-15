@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details - MovieHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #111111;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: rgba(17, 17, 17, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links a i {
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 100px auto 50px;
+            padding: 2rem;
+        }
+
+        .booking-details-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ff4d4d, #f9cb28);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 600;
+        }
+
+        .booking-info {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .booking-details {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+        }
+
+        .booking-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .detail-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .detail-label {
+            width: 120px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            flex: 1;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .primary-btn {
+            background: linear-gradient(45deg, #ff4d4d, #f9cb28);
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .booking-info {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">MovieHub</a>
+            <div class="nav-links">
+                <a href="index.html">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="book.html">
+                    <i class="fas fa-ticket-alt"></i> Book Now
+                </a>
+                <a href="user_profile.html">
+                    <i class="fas fa-user"></i> Profile
+                </a>
+                <a href="admin.html">
+                    <i class="fas fa-user-shield"></i> Admin
+                </a>
+                <a href="network_info.html">
+                    <i class="fas fa-network-wired"></i> Network Info
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="booking-details-section">
+            <h2 class="section-title">Booking Confirmation</h2>
+            
+            <div class="booking-info">
+                <h2>Booking Confirmation</h2>
+                <div class="info-group">
+                    <p><strong>Booking ID:</strong> <span id="bookingId"></span></p>
+                    <p><strong>Movie:</strong> <span id="movieTitle"></span></p>
+                    <p><strong>Theatre:</strong> <span id="theatreName"></span></p>
+                    <p><strong>Location:</strong> <span id="theatreLocation"></span></p>
+                    <p><strong>Show Time:</strong> <span id="showTime"></span></p>
+                    <p><strong>Seats:</strong> <span id="seats"></span></p>
+                    <p><strong>Customer Name:</strong> <span id="customerName"></span></p>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <a href="user_profile.html" class="action-btn secondary-btn">
+                    <i class="fas fa-user"></i> View My Bookings
+                </a>
+                <a href="index.html" class="action-btn primary-btn">
+                    <i class="fas fa-home"></i> Back to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get booking details from localStorage
+            const bookingDetails = JSON.parse(localStorage.getItem('bookingDetails'));
+            
+            if (bookingDetails) {
+                document.getElementById('bookingId').textContent = bookingDetails.booking_id;
+                document.getElementById('movieTitle').textContent = bookingDetails.movie_title;
+                document.getElementById('theatreName').textContent = bookingDetails.theatre_name;
+                document.getElementById('theatreLocation').textContent = bookingDetails.theatre_location;
+                document.getElementById('showTime').textContent = bookingDetails.show_time;
+                document.getElementById('seats').textContent = bookingDetails.seats;
+                document.getElementById('customerName').textContent = bookingDetails.customer_name;
+                
+                // Generate QR code
+                generateQRCode(bookingDetails.booking_id);
+            } else {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html> 
